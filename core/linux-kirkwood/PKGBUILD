@@ -36,7 +36,8 @@ source=("https://kernel.org/pub/linux/kernel/v4.x/linux-${pkgver}.tar.xz"
         "ftp://teambelgium.net/bfq/patches/${bfqkern}.0-${bfqver}/0001-block-cgroups-kconfig-build-bits-for-BFQ-${bfqver}-${bfqkern}.patch"
         "ftp://teambelgium.net/bfq/patches/${bfqkern}.0-${bfqver}/0002-block-introduce-the-BFQ-${bfqver}-I-O-sched-for-${bfqkern}.patch"
         "ftp://teambelgium.net/bfq/patches/${bfqkern}.0-${bfqver}/0003-block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-${bfqver}-for-${bfqkern}.0.patch"
-        'pci-e_fix.patch')
+        'pci-e_fix.patch'
+		'xhci-segment-fix.patch')
 
 md5sums=('71d8b666438e6b59f103e9384889c15a'
          '4c93651af09f6ded12855eec3704cba1'
@@ -63,6 +64,9 @@ msg2 "Applying aufs patches"
   patch -Np1 -i ../aufs4-standalone/aufs4-base.patch
   patch -Np1 -i ../aufs4-standalone/aufs4-mmap.patch
   patch -Np1 -i ../aufs4-standalone/aufs4-standalone.patch
+
+msg2 "Fix xHCI segment issue"
+  patch -Np1 -i ${srcdir}/xhci-segment-fix.patch
 
 msg2 "Disable buggy TCP segmentation offload implementation"
 msg2 "http://archlinuxarm.org/forum/viewtopic.php?f=9&t=7692"
